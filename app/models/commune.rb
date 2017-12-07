@@ -7,7 +7,7 @@ class Commune < ApplicationRecord
   validates :code_insee, presence: true, uniqueness: true, length: { is: 5 }
 
   def self.search(string)
-    Commune.where('name LIKE ?', "%#{sanitize_sql_like(string.downcase)}%")
+    Commune.where('name LIKE ?', "%#{sanitize_sql_like(string.mb_chars.downcase)}%")
   end
 
   def self.to_hash
