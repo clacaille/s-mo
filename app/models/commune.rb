@@ -4,7 +4,7 @@ class Commune < ApplicationRecord
   has_many :streets, through: :commune_streets
 
   validates :name, presence: true
-  validates :code_insee, presence: true, length: { is: 5 }
+  validates :code_insee, presence: true, uniqueness: true, length: { is: 5 }
 
   def self.search(string)
     Commune.where('name LIKE ?', "%#{sanitize_sql_like(string.downcase)}%")

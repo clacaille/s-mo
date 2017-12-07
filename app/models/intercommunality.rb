@@ -17,5 +17,13 @@ class Intercommunality < ApplicationRecord
       self.slug = name.try(:parameterize)
     end
   end
+
+  def population
+    i = 0
+    communes.each do |com|
+      i += com.population
+    end
+    i
+  end
 end
 
